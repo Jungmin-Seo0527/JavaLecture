@@ -1,5 +1,9 @@
 package InflearnJava8.Stream;
 
+import InflearnJava8.Optional.Progress;
+
+import java.util.Optional;
+
 public class OnlineClass {
 
     private Integer id;
@@ -7,6 +11,16 @@ public class OnlineClass {
     private String title;
 
     private boolean closed;
+
+    private Progress progress;
+
+    public Optional<Progress> getProgress() {
+        return Optional.ofNullable(progress);
+    }
+
+    public void setProgress(Progress progress) {
+        this.progress = progress;
+    }
 
     public Integer getId() {
         return id;

@@ -91,7 +91,7 @@ public class _3_Stream_Terminal_Operation {
         Optional<String> result1 = stream1.reduce((s1, s2) -> s1 + "++" + s2); // 넷++둘++셋++하나
         result1.ifPresent(System.out::println);
 
-        String result2 = stream2.reduce("시작", (s1, s2) -> s1 + "++" + s2); // 시작++넷++넷++둘++하나
+        String result2 = stream2.reduce("시작", (s1, s2) -> s1 + "++" + s2); // 시작++넷++셋++둘++하나
         System.out.println(result2);
 
         // 3. 요소의 검색
