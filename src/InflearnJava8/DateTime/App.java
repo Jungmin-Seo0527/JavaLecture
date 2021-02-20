@@ -61,5 +61,12 @@ public class App {
 
         Period until = today.until(thisYearBirthday);
         System.out.println("until = " + until.getDays());
+
+
+        Instant now2 = Instant.now();
+        Instant plus = now2.plus(10, ChronoUnit.SECONDS);
+        Duration between = Duration.between(now, plus);
+        System.out.println(between.getSeconds());
+
     }
 }
