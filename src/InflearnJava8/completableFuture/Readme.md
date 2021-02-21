@@ -173,7 +173,79 @@ public class App {
 ![](./img/thread_sleep.jpg)     
 쓰레드를 생성하면 무조건 1초 sleep 을 시켰다. 그 이후에 스레드 이름을 출력하므로 이 코드에서는 Hello 출력이 무조건적으로 먼저 실행된다.
 
-# 강의 시간 8 : 35 까지...
+### 2. Interupt
+
+* 다른 쓰레드 깨우기
+* 다른 스레드를 깨워서 interruptedException을 발생 시킨다.     
+  그 에러가 발생했을 때 할 일은 코딩하기 나름. 종료 시킬 수도 있고 계속 하던 일 할 수도 있다.
+
+```java
+package InflearnJava8.completableFuture;
+
+public class App {
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            while (true) {
+                System.out.println("Thread = " + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    System.out.println("exit!");
+                    return;
+                }
+            }
+        });
+        thread.start();
+        System.out.println("Hello: " + Thread.currentThread().getName());
+
+        Thread.sleep(3000L);
+        thread.interrupt();
+    }
+}
+```
+
+#### 코드 설명
+
+* 쓰래드를 생성하여 만약 InterruptedException 이 발생하면 "exit" 를 출력고 끝내도록 run() 을 만든다.
+* 쓰레드를 start 시키고 3초 이후에 interrupt 를 발생시킨다.
+
+#### 출력
+
+* 쓰레드 run() 에서 수행하는 쓰레드 이름을 출력시키는 작업을 3번을 한다. 이후 종료된다.
+  ![](./img/interrupt.jpg)
+
+### 3. join
+
+* 다른 쓰레드 기다리기
+* 다른쓰레드가 끝날 때까지 기다린다.
+
+```java
+package InflearnJava8.completableFuture;
+
+public class App {
+    public static void main(String[] args) {
+        Thread thread = new Thread(() -> {
+            System.out.println("Thread = " + Thread.currentThread().getName());
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+
+        });
+        thread.start();
+
+        System.out.println("Hello: " + Thread.currentThread().getName());
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(thread + " is finished");
+    }
+}
+```
+
 
 
 
